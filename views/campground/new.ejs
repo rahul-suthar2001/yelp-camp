@@ -1,0 +1,65 @@
+<% layout('layouts/boilerplate')%>
+
+    <div class="container mt-5">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-6">
+                <form action="/campground" method="post" novalidate class="form-validate" enctype="multipart/form-data">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Title</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name="campground[title]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            required field!
+                        </div>
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">location</span>
+                        <input type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name="campground[location]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            required field!
+                        </div>
+                    </div>
+                    <div class="input-group flex-nowrap  mb-3 ">
+                        <span class="input-group-text" id="addon-wrapping">$</span>
+                        <input type="text" class="form-control" placeholder="price" aria-label="Username"
+                            aria-describedby="addon-wrapping" name="campground[price]" required>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            required field!
+                        </div>
+                    </div>
+                    <div class="input-group mb-3 custom-file">
+                        <span class="input-group-text" id="inputGroup-sizing-default">images</span>
+                        <input type="file" class="form-control" id="inputGroupFile01" name="img" multiple > 
+                                 
+                      </div>
+                   
+                    <div class="input-group mb-3">
+                        <span class="input-group-text" id="inputGroup-sizing-default">Description</span>
+                        <textarea type="text" class="form-control" aria-label="Sizing example input"
+                            aria-describedby="inputGroup-sizing-default" name="campground[description]"
+                            required></textarea>
+                        <div class="valid-feedback">
+                            Looks good!
+                        </div>
+                        <div class="invalid-feedback">
+                            required field!
+                        </div>
+                    </div>
+
+                    <button class="btn btn-success">Submit</button>
+                </form>
+
+
+            </div>
+        </div>
+    </div>

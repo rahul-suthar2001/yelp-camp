@@ -1,0 +1,156 @@
+<% layout('layouts/boilerplate')%>
+    <link rel="stylesheet" href="/css/starReview.css">
+
+    
+    <div class="container mt-5">
+        <div class="row justify-content-md-center">
+
+            <div class="col-6">
+                <div class="card" mb-3>
+                    <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                            <% camp.img.forEach((imag, i)=> {%>
+                                <div class="carousel-item <%= i === 0 ? 'active' : ''%>">
+                                    <img src="<%=imag.url%>" class="d-block w-100" alt="">
+                                </div>
+                                <% }) %>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+                            data-bs-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <%= camp.title %>
+                        </h5>
+                        <p class="card-text">
+                            <%= camp.description%>
+                        </p>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-muted">
+                                <%= camp.location%>
+                            </li>
+                            <li class="list-group-item">Submitted by <%= camp.author.username%>
+                            </li>
+                            <li class="list-group-item">$<%= camp.price%>/night</li>
+                        </ul>
+                    </div>
+                    <% if( currentUser && camp.author.equals(currentUser._id)) {%>
+                        <div class="card-body">
+                            <a href="/campground/<%= camp._id %>/edit " class="btn btn-info">Edit</a>
+                            <a href="/campground " class="btn btn-success"><svg xmlns="http://www.w3.org/2000/svg"
+                                    width="16" height="16" fill="currentColor" class="bi bi-arrow-return-left"
+                                    viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z" />
+                                </svg> Back to collection</a>
+                            <form action="/campground/<%= camp._id %>?_method=DELETE" method="post" class="d-inline">
+                                <button class="btn btn-danger"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                        height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                        <path
+                                            d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z" />
+                                        <path fill-rule="evenodd"
+                                            d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z" />
+                                    </svg> Delete</button>
+                            </form>
+                        </div>
+                        <% } %>
+                </div>
+
+            </div>
+
+            <div class="col-6 ">
+                <div id='map' style='width: 400px; height: 300px;' class="m-5"></div>
+                    <form action="/campground/<%= camp._id%>/review" method="post" novalidate
+                        class="form-validate mb-3">
+                        <h2>Leave your review</h2>
+                        <fieldset class="starability-basic">
+                            <legend>First rating:</legend>
+                            <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked
+                                aria-label="No rating." />
+                            <input type="radio" id="first-rate1" name="review[rating]" value="1" />
+                            <label for="first-rate1" title="Terrible">1 star</label>
+                            <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+                            <label for="first-rate2" title="Not good">2 stars</label>
+                            <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+                            <label for="first-rate3" title="Average">3 stars</label>
+                            <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+                            <label for="first-rate4" title="Very good">4 stars</label>
+                            <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+                            <label for="first-rate5" title="Amazing">5 stars</label>
+                        </fieldset>
+
+                        <div class="form-floating mt-3">
+                            <textarea class="form-control " placeholder="Leave a comment here" id="floatingTextarea2"
+                                style="height: 100px" name="review[body]" required></textarea>
+                            <div class="valid-feedback">
+                                Looks good!
+                            </div>
+                            <label for="floatingTextarea2">Comments</label>
+
+                        </div>
+                        <div class="mt-3">
+                            <button class="btn btn-success">Submit</button>
+                        </div>
+                    </form>
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <% for(let review of camp.reviews) {%>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item text-muted">
+                                        <%= review.author.username%>
+                                    </li>
+                                    <p class="starability-result" data-rating="<%=review.rating%>"></p>
+                                    Rated: <%=review.rating%> stars
+                                        </p>
+                                        <li class="list-group-item">$<%= review.body%>
+                                        </li>
+                                </ul>
+                                <% if( currentUser && review.author.equals(currentUser._id)) {%>
+                                    <form action="/campground/<%=camp._id %>/review/<%=review._id %>?_method=delete "
+                                        method="post" class="mb-3">
+                                        <button class="btn btn-sm btn-danger ">Delete</button>
+                                    </form>
+                                    <% } %>
+                                        <% } %>
+                        </div>
+                    </div>
+
+            </div>
+
+        </div>
+    </div>
+    <script>
+        const mapToken = '<%- process.env.MAP_BOX_TOKEN%>';
+        const campground = <%- JSON.stringify(camp) %>
+    </script>
+    <script >
+    mapboxgl.accessToken = mapToken;
+    var map = new mapboxgl.Map({
+    container: 'map', // container ID
+    style: 'mapbox://styles/mapbox/streets-v11', // style URL
+    center: campground.geometry.coordinates, // starting position [lng, lat]
+    zoom: 9 // starting zoom
+    });
+    
+map.addControl(new mapboxgl.NavigationControl());
+
+
+new mapboxgl.Marker()
+    .setLngLat(campground.geometry.coordinates)
+    .setPopup(
+        new mapboxgl.Popup({ offset: 25 })
+            .setHTML(
+                `<h3>${campground.title}</h3><p>${campground.location}</p>`
+            )
+    )
+    .addTo(map)
+
+    </script>

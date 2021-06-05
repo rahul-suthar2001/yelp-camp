@@ -1,0 +1,57 @@
+<% layout('layouts/boilerplate')%>
+    <div class="container mt-5">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-3">
+                <div class="card py-4 px-3" style="width:18rem;">
+                    <div class="card-title">
+                        <h4>Register Form</h4>
+                        <img class="card-img-top"
+                            src="https://images.unsplash.com/photo-1568576550491-185584b2145a?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8Y2FtcGdyb3VuZHxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                            alt="Card image cap">
+
+                        <div class="card-body">
+
+                            <form action="/register" method="post" class="form-validate" novalidate>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Username</span>
+                                    <input type="text" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default" name="username" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        required field!
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">Email</span>
+                                    <input type="email" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default" name="email" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        required field!
+                                    </div>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="inputGroup-sizing-default">password</span>
+                                    <input type="password" class="form-control" aria-label="Sizing example input"
+                                        aria-describedby="inputGroup-sizing-default" name="password" required>
+                                    <div class="valid-feedback">
+                                        Looks good!
+                                    </div>
+                                    <div class="invalid-feedback">
+                                        required field!
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-success " style="width: 100%;">Submit</button>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
