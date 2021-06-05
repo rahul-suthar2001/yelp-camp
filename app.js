@@ -171,7 +171,7 @@ app.use((err, req, res, next) => {
 
 
 
-
-app.listen(8080, () => {
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
     console.log("connected app");
 })
